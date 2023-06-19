@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edwin Feng's Website</title>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="style.css">
+</head>
+    
+<body>
+    
+  <header class="header">
+    <h1>Edwin Feng</h1>
+      
+    <nav class="navbar">
+      <a href="./index.html"> Home</a>
+      <a href="./about.html">About</a>
+      <a href="./projects.html">Projects</a>
+      <a href="./contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+  
+  <section class="contact" id="contact">
+      <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class='bx bxs-paper-plane'></i>edwin.c.feng@gmail.com</p>
+                <p><i class='bx bxs-phone'></i>512-998-9710</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/ed__lose/?hl=en"><i class='bx bxl-instagram' ></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100083127491184"><i class='bx bxl-facebook-circle' ></i></a>
+                    <a href="https://twitter.com/SaturateC23783"><i class='bx bxl-twitter' ></i></a>
+                </div>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+      </div>
+  </section>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbx1CU4cFTkjKcq7ecwOCklgXdklelx6kWN-wY79L1ajFIMKTiKFKvU09TJKs1ekGHILIQ/exec'
+  const form = document.forms['submit-to-google-sheet']
+  const msg = document.getElementById("msg")
+  
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+        msg.innerHTML = "Message sent successfully"
+        setTimeout(function(){
+            msg.innerHTML = ""
+        },5000)
+        form.reset()
+    })
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+</body>
+</html>
